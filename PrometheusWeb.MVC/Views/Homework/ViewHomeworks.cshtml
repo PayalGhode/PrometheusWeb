@@ -1,0 +1,119 @@
+﻿@model IEnumerable<PrometheusWeb.Data.UserModels.HomeworkUserModel>
+
+@{
+    ViewBag.Title = "ViewHomeworks";
+}
+<style>
+    table {
+        width: 150px;
+        table-layout: auto;
+        width: 180px;
+    }
+
+    th {
+        background-color: #4CAF50;
+        font-weight: bold;
+        color: black;
+        border: groove;
+    }
+
+    tr:nth-child(even) {
+        background-color: #d9dad9;
+        color: black;
+    }
+
+    tr:nth-child(odd) {
+        color: black;
+    }
+
+    tr:hover {
+        background-color: #a0c3e2;
+    }
+
+    caption {
+        caption-side: bottom;
+    }
+</style>
+<h2>ViewHomeworks</h2>
+<body style="background:#d9d9dad9">
+</body>
+<div class="container" style="background:#f8f8f6">
+    
+    <table class="table">
+        <h2 style="padding-left:35%">List of all Homeworks</h2>
+        <div>
+            <button class="btn btn-primary " style="margin-right:1%; color:white">
+                @Html.ActionLink("Teacher Menu", "Index", "Teacher", null, new { @style = "color:White;" })
+        </button>
+
+        <button class="btn btn-primary ">
+            @Html.ActionLink("Create New Homework", "AddHomeworks", null, //   Route args if needed; null if not.
+                   new { @style = "color:White;" })
+        </button>
+        </div>
+
+        <br/>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeWorkID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReqTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LongDescription)
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HomeWorkID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deadline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReqTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LongDescription)
+                </td>
+                <td>
+                    <a href="@Url.Action("UpdateHomeworks", "Homework", new { id = item.HomeWorkID})" class="btn btn-primary"><i class="fa fa-pencil"></i>  Edit Homework</a>
+
+                    <a href="@Url.Action("AssignHomework","Homework",new {HomeworkID=item.HomeWorkID})" class="btn btn-primary">Assign Homework</a>
+                    <a onclick="Delete(@item.HomeWorkID)" class="btn btn-danger"><i class="fa fa-trash"></i>  Delete Homework</a>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Homeworks Delete','Are You Sure to Delete this Record ?',function(){
+                window.location.href  = '@Url.Action("Delete","Homework")/'+id;
+            },null );
+        }
+    </script>
+}

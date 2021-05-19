@@ -1,0 +1,124 @@
+﻿@model IEnumerable<PrometheusWeb.Data.UserModels.CourseUserModel>
+
+@{
+    ViewBag.Title = "ViewCourses";
+}
+
+<h2>View Courses</h2>
+
+
+<style>
+    table {
+        width: 150px;
+        table-layout: auto;
+        width: 180px;
+    }
+
+    th {
+        background-color: #4CAF50;
+        font-weight: bold;
+        color: black;
+        border: groove;
+    }
+
+    tr:nth-child(even) {
+        background-color: #d9dad9;
+        color: black;
+    }
+
+    tr:nth-child(odd) {
+        color: black;
+    }
+
+    tr:hover {
+        background-color: #a0c3e2;
+    }
+
+    caption {
+        caption-side: bottom;
+    }
+</style>
+<body style="background:#d9d9dad9">
+</body>
+<div class="container" style="background:#f8f8f6">
+    <h2 style="padding-left:35%">Courses List</h2>
+    <p>
+        <button class="btn btn-primary " style="margin-right:1%; color:white">
+            @Html.ActionLink("Admin Menu", "Index", "Admin", null, new { @style = "color:White;" })
+        </button>
+        <button class="btn btn-primary">
+            @Html.ActionLink("Create New", "AddCourse", null, //   Route args if needed; null if not.
+    new { @style = "color:White;" })
+        </button>
+        @using (Html.BeginForm("SearchCourse", "Courses", FormMethod.Get))
+        {
+            <input type="text" name="search" placeholder="Enter Course Name" style="color:black; font-weight:600;" />
+            <input type="submit" name="submit" value="Search" style="background-color:greenyellow; color:black; font-weight:600;" />
+        }
+    </p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    <a href="@Url.Action("UpdateCourse", "Courses", new { id = item.CourseID})" class="btn btn-primary"><i class="fa fa-pencil"></i>  Edit</a>
+                    @*<a href="@Url.Action("Delete", "Courses", new { id = item.CourseID})" class="btn btn-default"><i class="fa fa-pencil"></i>  Delete</a>*@
+                    <a onclick="Delete(@item.CourseID)" class="btn btn-danger"><i class="fa fa-trash"></i>  Delete</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        $(function () {
+            var errorMessage = '@TempData["ErrorMessage"]'
+            if (errorMessage != '')
+                alertify.error(errorMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Courses register','Are You Sure to Delete this Record ?',function(){
+                window.location.href  = '@Url.Action("DeleteCourse","Courses")/'+id;
+            },null );
+        }
+    </script>
+}

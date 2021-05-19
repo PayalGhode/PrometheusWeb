@@ -1,0 +1,103 @@
+﻿
+<style>
+
+    .btn:hover {
+        background-color: lightgreen;
+        right: 0px;
+    }
+
+    p {
+        color: gray;
+        font-weight: bold;
+    }
+
+
+    .column {
+        float: left;
+        width: 19%;
+        margin: 3%;
+    }
+
+    /* Remove extra left and right margins, due to padding in columns */
+    .row {
+        margin: 0 -5px;
+    }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+    /* Style the counter cards */
+    .card {
+        border: groove;
+        border-color: #027dc5;
+        border-radius: 10%;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        padding: 16px;
+        text-align: center;
+        background: linear-gradient(-45deg, #36d1dc, #5b86e5);
+       
+    }
+
+        .card:hover {
+            transform: scale(1.1);
+        }
+</style>
+
+@*Card implementation here*@
+<h2 style="padding-left:29%">Teacher Menu</h2>
+<div class="container" style="padding-top:8%; padding-left:4%">
+    <h2 style="padding-left:40%">Teacher Menu</h2>
+
+    <div class="row">
+        <div class="column">
+            <div class="card" style="width: 25rem; height:25rem; ">
+               
+                <div class="card-body">
+                    <h4 class="card-title" style="color:black; font-weight:bold">View Courses</h4>
+                    <h6 class="card-subtitle mb-2 text-muted" style="color:black; font-weight:bold">View all the Courses        </h6>
+                    <br />
+
+
+                    <button class="btn" style="font-weight:900;">@Html.ActionLink("View Courses", "ViewCoursesForTeaching", "Courses")</button>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card" style="width: 25rem; height:25rem; ">
+                
+                <div class="card-body">
+                    <h4 class="card-title" style="color:black; font-weight:bold">View Students</h4>
+                    <h6 class="card-subtitle mb-2 text-muted" style="color:black; font-weight:bold">View all the students under you !!!</h6>
+                    <br />
+                    <button class="btn" style="font-weight:900">@Html.ActionLink("View Students", "TeacherCourses", "Courses")</button>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card" style="width: 25rem; height:25rem; ">
+               
+                <div class="card-body">
+                    <h4 class="card-title" style="color:black; font-weight:bold">View Homework</h4>
+                    <h6 class="card-subtitle mb-2 text-muted" style="color:black; font-weight:bold">Add or Edit Homeworks</h6>
+                    <br />  
+                    <button class="btn" style="font-weight:900">@Html.ActionLink("Homework", "ViewHomeworks", "Homework")</button>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card" style="width: 25rem; height:25rem; ">
+              
+                <div class="card-body">
+                    <h4 class="card-title" style="color:black; font-weight:bold">Update Profile</h4>
+                    <h6 class="card-subtitle mb-2 text-muted" style="color:black; font-weight:bold">Update your Personal details here        </h6>
+                    <br />
+                    <button class="btn" style="font-weight:900; ">@Html.ActionLink("Update Profile", "UpdateTeacherProfile", "Teacher")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>>

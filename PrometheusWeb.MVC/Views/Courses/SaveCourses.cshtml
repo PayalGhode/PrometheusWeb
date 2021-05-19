@@ -1,0 +1,89 @@
+﻿@model PrometheusWeb.Data.UserModels.CourseUserModel
+@{
+    ViewBag.Title = "SaveCourses";
+}
+<style>
+    .column {
+        float: left;
+        width: 19%;
+        padding: 0 10px;
+    }
+
+    /* Remove extra left and right margins, due to padding in columns */
+    .row {
+        margin: 0 -5px;
+    }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+    /* Style the counter cards */
+    /* Style the counter cards */
+    .card {
+        border: groove;
+        border-color: #027dc5;
+        border-radius: 10%;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        padding: 16px;
+        text-align: center;
+        background: linear-gradient(-45deg, #36d1dc, #5b86e5);
+    }
+
+        .card:hover {
+            transform: scale(1.1);
+        }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="container" style="padding-left:27%; padding-top:7%">
+        <h2>Save Course for Teacher</h2>
+        <div class="row">
+            <div class="column">
+                <div class="card text-center" style="width: 30rem;">
+
+                    <div class="card-body">
+                        <h2 class="card-title" style="color:black; font-weight:bold">
+                            @Html.DisplayFor(model => model.Name, new { disabled = "disabled", @readonly = "readonly" })
+                        </h2>
+                        <h4 class="card-subtitle mb-2 text-muted" style="color:black; font-weight:bold">
+                            CourseID: # @Html.DisplayFor(model => model.CourseID, new { disabled = "disabled", @readonly = "readonly" })
+                        </h4>
+                        <h4 class="card-text" style="color:black; font-weight:bold">
+                            Start Date:  @Html.DisplayFor(model => model.StartDate, new { disabled = "disabled", @readonly = "readonly" })
+                        </h4>
+                        <h4 class="card-text" style="color:black; font-weight:bold">
+                            End Date: @Html.DisplayFor(model => model.EndDate, new { disabled = "disabled", @readonly = "readonly" })
+                        </h4>
+                        <div class="form-group">
+                            <input type="submit" value="Teach Course" class="btn btn-primary" />
+                            <button class="btn btn-primary " style="margin-right:1%; color:white">
+                                @Html.ActionLink("Back to Courses", "ViewCoursesForTeaching", "Courses", null, new { @style = "color:White;" })
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+}
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            var errorMessage = '@TempData["ErrorMessage"]'
+            if (errorMessage != '')
+                alertify.error(errorMessage);
+
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+    </script>
+}

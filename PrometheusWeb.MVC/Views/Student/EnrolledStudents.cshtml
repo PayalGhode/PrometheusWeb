@@ -1,0 +1,105 @@
+﻿@model IEnumerable<PrometheusWeb.Data.UserModels.StudentUserModel>
+
+@{
+    ViewBag.Title = "EnrolledStudents";
+}
+<style>
+    table {
+        width: 150px;
+        table-layout: auto;
+        width: 180px;
+    }
+
+    th {
+        background-color: #4CAF50;
+        font-weight: bold;
+        color: black;
+        border: groove;
+    }
+
+    tr:nth-child(even) {
+        background-color: #d9dad9;
+        color: black;
+    }
+
+    tr:nth-child(odd) {
+        color: black;
+    }
+
+    tr:hover {
+        background-color: #a0c3e2;
+    }
+
+    caption {
+        caption-side: bottom;
+    }
+</style>
+<body style="background:#d9d9dad9">
+</body>
+<div class="container" style="background:#f8f8f6">
+    <h2>MyStudents</h2>
+    <table class="table">
+        <h2 style="padding-left:35%">List of my Students</h2>
+        <button class="btn btn-primary " style="margin-right:1%; color:white">
+            @Html.ActionLink("Go Back", "TeacherCourses", "Courses", null, new { @style = "color:White;" })
+        </button>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileNo)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNo)
+                </td>
+                <td>
+                    <a href="@Url.Action("StudentCourses","Courses",
+                    new { id = item.StudentID})" class="btn btn-primary">View this student's all Courses</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

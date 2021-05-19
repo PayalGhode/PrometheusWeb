@@ -1,0 +1,74 @@
+﻿@model IEnumerable<PrometheusWeb.Data.UserModels.EnrollmentUserModel>
+<!-- CSS only -->
+@{
+    ViewBag.Title = "StudentCourses";
+}
+<style>
+    .column {
+        float: left;
+        width: 19%;
+        margin: 3%;
+    }
+
+    /* Remove extra left and right margins, due to padding in columns */
+    .row {
+        margin: 0 -5px;
+    }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+    /* Style the counter cards */
+    .card {
+        border: groove;
+        border-color: #027dc5;
+        border-radius: 10%;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        padding: 16px;
+        text-align: center;
+        background: linear-gradient(-45deg, #36d1dc, #5b86e5);
+    }
+
+        .card:hover {
+            transform: scale(1.1);
+        }
+</style>
+<div class="container">
+    <h2>My Enrolled Courses</h2>
+   
+
+        @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+
+        <div class="row">
+            <h2 style="padding-left:35%">List of Student Enrolled Courses</h2>
+            @foreach (var item in Model)
+            {
+                
+                   
+               
+                <div class="column">
+                    <div class="card" style="width: 20rem;">
+                        
+                            <img src="~/Content/Images/design.jpg" class="card-img-top" alt="..." style="width:16rem; height: 16rem;">
+                        
+                        
+                        <div class="card-body">
+                            <h5 class="card-title" style="color:black; font-weight:bold">@Html.DisplayFor(modelItem => item.Course.Name)</h5>
+                            <h6 class="card-subtitle mb-2 text-muted" style="color:black; font-weight:bold">EnrollmentID: #@Html.DisplayFor(modelItem => item.EnrollmentID)</h6>
+
+                            <h6 class="card-subtitle mb-2 text-muted" style="color:black; font-weight:bold">CourseID: #@Html.DisplayFor(modelItem => item.CourseID)</h6>
+                            <p class="card-text" style="color:black; font-weight:bold">Start Date: @Html.DisplayFor(modelItem => item.Course.StartDate)</p>
+                            <p class="card-text" style="color:black; font-weight:bold">End Date: @Html.DisplayFor(modelItem => item.Course.EndDate)</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+        </div>

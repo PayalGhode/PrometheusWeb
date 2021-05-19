@@ -1,0 +1,128 @@
+﻿@model PrometheusWeb.Data.UserModels.AssignmentUserModel
+    ViewBag.Title = "AssignHomework";
+}
+<style>
+
+    .btn:hover {
+        background-color: lightgreen;
+        right: 0px;
+    }
+
+    p {
+        color: gray;
+        font-weight: bold;
+    }
+
+
+    .column {
+        float: left;
+        width: 19%;
+        margin: 3%;
+    }
+
+    /* Remove extra left and right margins, due to padding in columns */
+    .row {
+        margin: 0 -5px;
+    }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+    /* Style the counter cards */
+
+
+    .card {
+        border: groove;
+        border-color: #027dc5;
+        border-radius: 10%;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        padding: 16px;
+        text-align: center;
+        background: linear-gradient(-45deg, #36d1dc, #5b86e5);
+        .card:hover
+
+    {
+        transform: scale(1.1);
+    }
+
+
+    card text-center {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        background-color: #f1f1f1;
+    }
+</style>
+@using (Html.BeginForm("AssignHomework", "Homework", new { homeworkID = Model.HomeWorkID, CourseID = Model.CourseID, TeacherID = Model.TeacherID }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="container" style="padding-left:21%; padding-top:7%">
+        <h2 style="padding-left:3%">Assign Homework For Course</h2>
+        <div class="row">
+            <div class="column">
+
+
+
+                <div class="card text-center" style="width: 45rem;">
+
+
+                    <div class="card-body">
+                        <div>
+                            <h4 class="card-subtitle mb-2 text-muted" style="color:black; font-weight:bold">
+                                HomeworkID: # @Html.DisplayFor(model => model.HomeWorkID, new { disabled = "disabled" })
+                            </h4>
+
+                        </div>
+                        <div>
+                        </div>
+                        <div>
+                            <h4 class="card-text" style="color:black; font-weight:bold">
+
+                                <label class="control-label col-md-2">Select Course</label>
+
+                                <div class="col-md-10" style="padding-bottom:10%; margin-bottom:5%; padding-top:3%">
+                                    @Html.DropDownListFor(model => model.CourseID, ViewBag.CourseList as SelectList, "---Select Course--", new { @class = "form-control" })
+                                </div>
+
+                            </h4>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Assign Homework" class="btn btn-primary" />
+                            <button class="btn btn-primary " style="margin-right:1%; color:white">
+                                @Html.ActionLink("Back to Homework", "ViewHomeworks", "Homework", null, new { @style = "color:White;" })
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+}
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1990:2021"
+            });
+        });
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+        $(function () {
+            var errorMessage = '@TempData["ErrorMessage"]'
+            if (errorMessage != '')
+                alertify.error(errorMessage);
+        });
+    </script>
+}

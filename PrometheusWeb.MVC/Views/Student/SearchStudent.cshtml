@@ -1,0 +1,141 @@
+﻿@model IEnumerable<PrometheusWeb.Data.UserModels.StudentUserModel>
+
+@{
+    ViewBag.Title = "SearchStudent";
+}
+
+<h2>Search Student</h2>
+<style>
+    table {
+        width: 150px;
+        table-layout: auto;
+        width: 180px;
+    }
+
+    th {
+        background-color: #4CAF50;
+        font-weight: bold;
+        color: black;
+        border: groove;
+    }
+
+    tr:nth-child(even) {
+        background-color: #d9dad9;
+        color: black;
+    }
+
+    tr:nth-child(odd) {
+        color: black;
+    }
+
+    tr:hover {
+        background-color: #a0c3e2;
+    }
+
+    caption {
+        caption-side: bottom;
+    }
+</style>
+<body style="background:#d9d9dad9">
+</body>
+<div class="container" style="background:#f8f8f6">
+    <h2 style="padding-left:35%">Search Student</h2>
+    <p>
+        <button class="btn btn-primary " style="margin-right:1%; color:white">
+            @Html.ActionLink("Admin Menu", "Index", "Admin", null, new { @style = "color:White;" })
+        </button>
+        @*@Html.ActionLink("Create New", "Create")*@
+        @using (Html.BeginForm("SearchStudent", "Student", FormMethod.Get))
+        {
+            <input type="text" name="search" placeholder="Enter Student Name" style="color:black; font-weight:600;" />
+            <input type="submit" name="submit" value="Search" style="background-color:greenyellow; color:black; font-weight:600;" />
+        }
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileNo)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNo)
+                </td>
+                <td>
+                    <a href="@Url.Action("UpdateStudent", "Student", new { id = item.StudentID})" class="btn btn-primary"><i class="fa fa-pencil"></i>  Edit</a>
+                    @*<a href="@Url.Action("Delete", "Admin", new { id = item.StudentID})" class="btn btn-default"><i class="fa fa-pencil"></i>  Delete</a>*@
+                    <a onclick="Delete(@item.StudentID)" class="btn btn-danger"><i class="fa fa-trash"></i>  Delete</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        $(function () {
+            var errorMessage = '@TempData["ErrorMessage"]'
+            if (errorMessage != '')
+                alertify.error(errorMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Courses register','Are You Sure to Delete this Record ?',function(){
+                window.location.href  = '@Url.Action("DeleteStudent", "Student")/'+id;
+            },null );
+        }
+    </script>
+}

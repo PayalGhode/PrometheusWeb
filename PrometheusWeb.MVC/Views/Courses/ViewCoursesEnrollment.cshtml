@@ -1,0 +1,85 @@
+﻿@model IEnumerable<PrometheusWeb.Data.UserModels.CourseUserModel>
+
+@{
+    ViewBag.Title = "ViewCoursesEnrollment";
+}
+<style>
+    table {
+        width: 150px;       
+        table-layout: auto;
+        width: 180px;
+    }
+    th {
+        background-color: #4CAF50;
+        font-weight:bold;
+        color: black;
+        border:groove;
+    }
+    tr:nth-child(even) {
+        background-color: #d9dad9;
+        color:black;
+        
+    }
+    tr:nth-child(odd){
+        color:black;
+    }
+    tr:hover {
+        background-color: #a0c3e2;
+    }
+    caption {
+        caption-side: bottom;
+    }
+    .btn:hover {
+        background-color: lightgreen;
+        right: 0px;
+    }
+</style>
+<body style="background-color:#d9dad9;"></body>
+<h2>ViewCourses</h2>
+
+<div class="container" style="padding:2%; background-color:#f8f8f6;">
+<table class="table">
+    <caption style="; font-family:Arial, Helvetica, sans-serif; font-weight:400; font-size:medium">List of all the available courses</caption>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+
+
+        <td>
+            <button class="btn btn-primary">@Html.ActionLink("Enroll", "EnrollInCourse", item, //   Route args if needed; null if not.
+            new { @style = "color:White;" }) </button>
+            
+        </td>
+
+    </tr>
+}
+
+</table>
+</div>

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "EnrollInCourse";
+}
+
+<div class="container" style="margin-top: 200px;">
+
+
+    <h2 class="alert alert-info">@ViewBag.Message</h2>
+    
+
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+    </script>
+}

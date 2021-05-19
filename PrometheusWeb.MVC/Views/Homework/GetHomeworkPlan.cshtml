@@ -1,0 +1,98 @@
+﻿@model IEnumerable<PrometheusWeb.Data.UserModels.HomeworkPlanUserModel>
+
+@{
+    ViewBag.Title = "GetHomeworkPlan";
+}
+<style>
+    table {
+        width: 150px;
+        table-layout: auto;
+        width: 180px;
+    }
+
+    th {
+        background-color: #4CAF50;
+        font-weight: bold;
+        color: black;
+        border: groove;
+    }
+
+    tr:nth-child(even) {
+        background-color: #d9dad9;
+        color: black;
+    }
+
+    tr:nth-child(odd) {
+        color: black;
+    }
+
+    tr:hover {
+        background-color: #a0c3e2;
+    }
+
+    caption {
+        caption-side: bottom;
+    }
+</style>
+<body style="background:#d9dad9;"></body>
+<br/>
+<br />
+<div class="container" style="background:#f8f8f6; " >
+   
+    <p>
+        <button class="btn btn-primary">@Html.ActionLink("Generate New Plan", "GenerateHomeworkPlan", null, //   Route args if needed; null if not.
+            new { @style = "color:White;" })</button>
+    </p>
+    
+    @if (Model != null)
+    {
+        <table class="table">
+            <tr>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.HomeworkID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Homework.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PriorityLevel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.isCompleted)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HomeworkID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Homework.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PriorityLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isCompleted)
+                    </td>
+                    <td>
+                        <button class="btn btn-block">@Html.ActionLink("Update Plan", "UpdateHomeworkPlan", new { id = item.HomeworkPlanID }) </button>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+        <h3>@ViewBag.Message</h3>
+    }
+
+</div>

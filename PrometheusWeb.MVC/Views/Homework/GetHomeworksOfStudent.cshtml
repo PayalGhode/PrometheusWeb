@@ -1,0 +1,98 @@
+﻿@model IEnumerable<PrometheusWeb.MVC.Models.ViewModels.AssignedHomework>
+
+    @{
+    ViewBag.Title = "GetHomeworks";
+    }
+
+    <h2>GetHomeworks</h2>
+
+    
+    <style>
+        table {
+            width: 150px;
+            table-layout: auto;
+            width: 180px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            font-weight: bold;
+            color: black;
+            border: groove;
+        }
+
+        tr:nth-child(even) {
+            background-color: #d9dad9;
+            color: black;
+        }
+
+        tr:nth-child(odd) {
+            color: black;
+        }
+
+        tr:hover {
+            background-color: #a0c3e2;
+        }
+
+        caption {
+            caption-side: bottom;
+        }
+    </style>
+<body style=" background-color:#d9dad9;"></body>
+<div class="container" style="background-color: #f8f8f6;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssignmentID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeWorkID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReqTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LongDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssignmentID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HomeWorkID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deadline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReqTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LongDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                
+            </tr>
+        }
+
+    </table>
+</div>
